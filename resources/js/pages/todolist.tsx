@@ -42,7 +42,6 @@ export default function TodoList(props: { list: Array<any> }) {
 
     const handleEdit = (value: boolean) => {
         setIsPressed(value);
-        console.log(value);
     };
 
     const [title, setTitle] = useState('');
@@ -53,9 +52,6 @@ export default function TodoList(props: { list: Array<any> }) {
         setId(newId);
         setTitle(newTitle);
         setDescription(newDescription);
-        console.log(newId);
-        console.log(newTitle);
-        console.log(newDescription);
     };
 
     const cancelEdit = (val: boolean) => {

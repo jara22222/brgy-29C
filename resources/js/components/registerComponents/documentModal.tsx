@@ -50,7 +50,6 @@ export default function DocumentModal({ isOpen, onClose }: DocumentModalProps) {
             },
             onError: (errors: any) => {
                 setIsSubmitting(false);
-                console.error('Error creating document:', errors);
             },
         });
     };

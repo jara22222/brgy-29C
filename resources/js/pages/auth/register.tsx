@@ -217,7 +217,6 @@ export default function Register() {
         post('/register', {
             onFinish: () => reset('password', 'password_confirmation'),
             onError: (submissionErrors) => {
-                console.error('Registration errors:', submissionErrors);
                 const errorStep = getStepWithError(submissionErrors);
                 setCurrentStep(errorStep);
             },

@@ -117,7 +117,6 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                 toast.error('Error adding staff', {
                     position: 'top-right',
                 });
-                return console.error('Error creating staff:', errors);
             },
             onFinish: () => {
                 setIsSubmitting(false);

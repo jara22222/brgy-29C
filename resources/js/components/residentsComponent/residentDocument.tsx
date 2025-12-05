@@ -51,35 +51,35 @@ export default function ResidentDocument() {
         [];
 
     return (
-        <section className="flex w-full flex-col items-center bg-slate-50 px-4 py-12 font-rubik sm:px-8 sm:py-16 md:px-16 lg:px-24 lg:py-20 xl:px-35 xl:py-25">
+        <section className="flex w-full flex-col items-center bg-slate-50 px-3 py-8 font-rubik sm:px-6 sm:py-12 md:px-12 md:py-16 lg:px-20 lg:py-20 xl:px-32 xl:py-24 2xl:px-40">
             <div className="text-center">
-                <h1 className="mb-2 text-3xl font-bold text-gray-900">
+                <h1 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                     Humiling ng mga Dokumento Dito!
                 </h1>
             </div>
-            <div className="mt-4 text-center sm:mt-5">
-                <p className="text-xl text-gray-800">
+            <div className="mt-3 text-center sm:mt-4 md:mt-5">
+                <p className="text-lg text-gray-800 sm:text-xl md:text-2xl">
                     Ang inyong maaasahang online na daan para sa mga kahilingan
                     at tulong mula sa barangay.
                 </p>
             </div>
 
             {/* Barangay Clearances Section */}
-            <div className="mt-12 w-full sm:mt-16 md:mt-20">
-                <h2 className="mb-8 text-center text-xl font-semibold text-gray-800 sm:text-2xl md:mb-10">
+            <div className="mt-8 w-full sm:mt-12 md:mt-16">
+                <h2 className="mb-6 text-center text-lg font-semibold text-gray-800 sm:text-xl md:mb-8 lg:text-2xl">
                     Barangay Clearances
                 </h2>
 
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {clearanceDocuments.map((service: Document) => (
                         <div
                             key={service.id}
-                            className="flex flex-col rounded-xl bg-white p-6 shadow-sm"
+                            className="flex flex-col rounded-xl bg-white p-4 shadow-sm sm:p-6"
                         >
-                            <h3 className="mb-3 font-semibold text-gray-900">
+                            <h3 className="mb-2 font-semibold text-gray-900 sm:mb-3">
                                 {service.documentName}
                             </h3>
-                            <p className="mb-4 flex-grow text-sm text-gray-600">
+                            <p className="mb-3 flex-grow text-sm text-gray-600 sm:mb-4">
                                 {service.documentPurpose}
                             </p>
                             <Button
@@ -99,21 +99,21 @@ export default function ResidentDocument() {
             </div>
 
             {/* Barangay Certificates Section */}
-            <div className="mt-12 w-full sm:mt-16 md:mt-20">
-                <h2 className="mb-8 text-center text-xl font-semibold text-gray-800 sm:text-2xl md:mb-10">
+            <div className="mt-8 w-full sm:mt-12 md:mt-16">
+                <h2 className="mb-6 text-center text-lg font-semibold text-gray-800 sm:text-xl md:mb-8 lg:text-2xl">
                     Barangay Certificates
                 </h2>
 
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {certificateDocuments.map((service: Document) => (
                         <div
                             key={service.id}
-                            className="flex flex-col rounded-xl bg-white p-6 shadow-sm"
+                            className="flex flex-col rounded-xl bg-white p-4 shadow-sm sm:p-6"
                         >
-                            <h3 className="mb-3 font-semibold text-gray-900">
+                            <h3 className="mb-2 font-semibold text-gray-900 sm:mb-3">
                                 {service.documentName}
                             </h3>
-                            <p className="mb-4 flex-grow text-sm text-gray-600">
+                            <p className="mb-3 flex-grow text-sm text-gray-600 sm:mb-4">
                                 {service.documentPurpose}
                             </p>
                             <Button
@@ -133,21 +133,21 @@ export default function ResidentDocument() {
             </div>
 
             {/* Additional Services Section */}
-            <div className="mt-12 w-full sm:mt-16 md:mt-20">
-                <div className="mb-8 text-center text-xl font-semibold text-gray-800 sm:text-2xl md:mb-10">
+            <div className="mt-8 w-full sm:mt-12 md:mt-16">
+                <div className="mb-6 text-center text-lg font-semibold text-gray-800 sm:text-xl md:mb-8 lg:text-2xl">
                     Additional Services
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {specialDocuments.map((service: Document) => (
                         <div
                             key={service.id}
-                            className="flex flex-col rounded-xl bg-white p-6 shadow-sm"
+                            className="flex flex-col rounded-xl bg-white p-4 shadow-sm sm:p-6"
                         >
-                            <h3 className="mb-3 font-semibold text-gray-900">
+                            <h3 className="mb-2 font-semibold text-gray-900 sm:mb-3">
                                 {service.documentName}
                             </h3>
-                            <p className="mb-4 flex-grow text-sm text-gray-600">
+                            <p className="mb-3 flex-grow text-sm text-gray-600 sm:mb-4">
                                 {service.documentPurpose}
                             </p>
                             <Button

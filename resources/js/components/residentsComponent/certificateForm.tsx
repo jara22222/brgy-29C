@@ -53,7 +53,6 @@ export default function CertificateForm() {
 
     useEffect(() => {
         // Debug: Log current user data
-        console.log('Current user:', currentUser);
 
         // Get URL parameters for document info
         const urlParams = new URLSearchParams(window.location.search);
@@ -66,9 +65,6 @@ export default function CertificateForm() {
             // Format address if available - check multiple possible address structures
             let formattedAddress = '';
 
-            console.log('Current user full object:', currentUser);
-            console.log('Current user address:', currentUser.address);
-
             // Check if address exists as an object with street, barangay, city, province properties
             if (
                 currentUser.address &&
@@ -78,7 +74,6 @@ export default function CertificateForm() {
                     currentUser.address.city ||
                     currentUser.address.province)
             ) {
-                console.log('Using address object structure');
                 const { street, barangay, city, province } =
                     currentUser.address;
                 const addressParts = [street, barangay, city, province].filter(
@@ -91,7 +86,6 @@ export default function CertificateForm() {
                 currentUser.address &&
                 typeof currentUser.address === 'string'
             ) {
-                console.log('Using address string');
                 formattedAddress = currentUser.address;
             }
             // Alternative: Check for individual address properties directly on user object
@@ -101,7 +95,6 @@ export default function CertificateForm() {
                 currentUser.city ||
                 currentUser.province
             ) {
-                console.log('Using flat address structure');
                 const addressParts = [
                     currentUser.street,
                     currentUser.barangay,
@@ -112,11 +105,8 @@ export default function CertificateForm() {
             }
             // Fallback: Use empty string if no address found
             else {
-                console.log('No address found, using empty string');
                 formattedAddress = '';
             }
-
-            console.log('Formatted address:', formattedAddress);
 
             setFormData((prev) => ({
                 ...prev,
@@ -177,9 +167,6 @@ export default function CertificateForm() {
                 setIsSubmitting(false);
             },
             onError: (errors: FormErrors) => {
-                console.error('Submission errors:', errors);
-                console.error('Form data being submitted:', formData);
-
                 // Display specific error messages
                 if (errors && typeof errors === 'object') {
                     const errorMessages = Object.values(errors).flat();

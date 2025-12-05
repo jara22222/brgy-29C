@@ -1,4 +1,5 @@
 import { router, usePage } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import RequirementsModal from './requirementsModal';
@@ -76,9 +77,6 @@ export default function GuestForm() {
                 setIsSubmitting(false);
             },
             onError: (errors: FormErrors) => {
-                console.error('Submission errors:', errors);
-                console.error('Form data being submitted:', submissionData);
-
                 // Display specific error messages
                 if (errors && typeof errors === 'object') {
                     const errorMessages = Object.values(errors).flat();
@@ -98,6 +96,10 @@ export default function GuestForm() {
         });
     };
 
+    const handleBack = () => {
+        router.visit('/');
+    };
+
     const handleConfirmSubmission = () => {
         // Close the modal after user confirms seeing the success message
         setIsModalOpen(false);
@@ -109,14 +111,30 @@ export default function GuestForm() {
 
     return (
         <div className="w-full py-6 font-sans md:py-8 lg:py-12">
-            {/* Main Header */}
-            <div className="mb-12 text-center">
-                <h1 className="mb-4 text-3xl font-bold text-gray-800 md:text-4xl lg:text-5xl">
-                    Guest Certificate Application Form
-                </h1>
-                <p className="text-lg text-gray-500 md:text-xl">
-                    Paraan ng pag proseso sa dokumento para sa mga non-resident
-                </p>
+            {/* Main Header with Back Button */}
+            <div className="mb-12">
+                {/* Back Button */}
+                <div className="mb-6">
+                    <Button
+                        onClick={handleBack}
+                        variant="outline"
+                        className="flex items-center gap-2 border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                    >
+                        <ArrowLeft className="h-4 w-4" />
+                        Back
+                    </Button>
+                </div>
+
+                {/* Header Content */}
+                <div className="text-center">
+                    <h1 className="mb-4 text-3xl font-bold text-gray-800 md:text-4xl lg:text-5xl">
+                        Guest Certificate Application Form
+                    </h1>
+                    <p className="text-lg text-gray-500 md:text-xl">
+                        Paraan ng pag proseso sa dokumento para sa mga
+                        non-resident
+                    </p>
+                </div>
             </div>
 
             {/* Document Information */}

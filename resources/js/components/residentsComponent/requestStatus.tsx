@@ -83,14 +83,14 @@ export default function RequestStatus() {
     return (
         <div className="w-full">
             {/* Header Section */}
-            <div className="mb-6 text-center sm:mb-8 md:mb-10">
-                <h1 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+            <div className="mb-4 text-center sm:mb-6 md:mb-8">
+                <h1 className="mb-2 text-xl font-bold text-gray-900 sm:text-2xl md:text-3xl lg:text-4xl">
                     Mabuhay, {currentUser.name}!
                 </h1>
-                <h2 className="mb-4 text-lg text-gray-800 sm:text-xl md:text-2xl">
+                <h2 className="mb-3 text-base font-medium text-gray-800 sm:text-lg md:text-xl lg:text-2xl">
                     Welcome to Barangay 29-C Online Portal!
                 </h2>
-                <p className="mx-auto max-w-2xl text-sm text-gray-600 sm:text-base">
+                <p className="mx-auto max-w-2xl text-xs text-gray-600 sm:text-sm md:text-base">
                     Dito sa aming barangay website, maaari ka nang mag-request
                     ng Barangay Certificate at Barangay Clearance nang mabilis
                     at madali online!
@@ -100,13 +100,13 @@ export default function RequestStatus() {
             {/* Request Cards Grid */}
             <div className="grid grid-cols-1 gap-4 lg:gap-6 xl:grid-cols-2 xl:gap-8">
                 {/* Left Panel: Request Status Card */}
-                <div className="rounded-lg bg-white p-6 shadow-md">
-                    <h3 className="mb-4 text-lg font-semibold text-gray-900">
+                <div className="rounded-lg bg-white p-4 shadow-md sm:p-6">
+                    <h3 className="mb-3 text-base font-semibold text-gray-900 sm:mb-4 sm:text-lg">
                         Request Status
                     </h3>
 
                     {/* Table Headers */}
-                    <div className="mb-3 hidden grid-cols-4 gap-2 text-xs font-medium text-gray-500 sm:grid sm:gap-4 md:gap-6">
+                    <div className="mb-2 hidden grid-cols-4 gap-2 text-xs font-medium text-gray-500 sm:mb-3 sm:grid sm:gap-4 md:gap-6">
                         <div>Document Name</div>
                         <div className="col-span-2">Status</div>
                         <div>Date Requested</div>
@@ -121,7 +121,7 @@ export default function RequestStatus() {
                             return (
                                 <div
                                     key={certificate.id}
-                                    className="rounded-lg border p-4"
+                                    className="rounded-lg border p-3 sm:p-4"
                                 >
                                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 sm:items-start sm:gap-6">
                                         {/* File Icon and Info */}
@@ -142,9 +142,9 @@ export default function RequestStatus() {
 
                                         {/* Progress Stepper */}
                                         <div className="sm:col-span-2">
-                                            <div className="relative flex items-center justify-between px-2">
+                                            <div className="relative flex items-center justify-between px-1 sm:px-2">
                                                 {/* Progress Line */}
-                                                <div className="absolute top-2 right-2 left-2 z-0 h-0.5 bg-gray-200"></div>
+                                                <div className="absolute top-2 right-1 left-1 z-0 h-0.5 bg-gray-200 sm:right-2 sm:left-2"></div>
                                                 {steps.map((step, index) => (
                                                     <div
                                                         key={step.key}
@@ -175,20 +175,20 @@ export default function RequestStatus() {
                                                             className="group flex flex-col items-center"
                                                         >
                                                             <div
-                                                                className={`flex h-4 w-4 items-center justify-center rounded-full ${
+                                                                className={`flex h-3 w-3 items-center justify-center rounded-full sm:h-4 sm:w-4 ${
                                                                     step.completed
                                                                         ? 'bg-green-500'
                                                                         : 'bg-gray-300'
                                                                 }`}
                                                             >
                                                                 {step.completed && (
-                                                                    <Check className="h-2 w-2 text-white" />
+                                                                    <Check className="h-1.5 w-1.5 text-white sm:h-2 sm:w-2" />
                                                                 )}
                                                             </div>
-                                                            <span className="mt-1 text-[12px] text-gray-600 group-hover:hidden">
+                                                            <span className="mt-1 text-[10px] text-gray-600 group-hover:hidden sm:text-[12px]">
                                                                 {step.short}
                                                             </span>
-                                                            <span className="mt-1 hidden text-[12px] text-gray-600 group-hover:block">
+                                                            <span className="mt-1 hidden text-[10px] text-gray-600 group-hover:block sm:text-[12px]">
                                                                 {step.full}
                                                             </span>
                                                         </div>
@@ -231,61 +231,65 @@ export default function RequestStatus() {
                         </div>
                     )}
 
-                    {/* Pagination */}
-                    {certificates && certificates.last_page > 1 && (
-                        <div className="mt-4 flex items-center justify-between">
-                            <div className="text-sm text-gray-700">
-                                Showing {certificates.from} to {certificates.to}{' '}
-                                of {certificates.total} results
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <button
-                                    onClick={() =>
-                                        router.get(certificates.prev_page_url)
-                                    }
-                                    disabled={!certificates.prev_page_url}
-                                    className="flex items-center gap-1 rounded-md border border-gray-300 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-                                >
-                                    <ChevronLeft className="h-4 w-4" />
-                                    Previous
-                                </button>
-                                <span className="text-sm text-gray-600">
-                                    Page {certificates.current_page} of{' '}
-                                    {certificates.last_page}
-                                </span>
-                                <button
-                                    onClick={() =>
-                                        router.get(certificates.next_page_url)
-                                    }
-                                    disabled={!certificates.next_page_url}
-                                    className="flex items-center gap-1 rounded-md border border-gray-300 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-                                >
-                                    Next
-                                    <ChevronRight className="h-4 w-4" />
-                                </button>
-                            </div>
+                    <div className="mt-3 flex flex-col gap-3 sm:mt-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="text-xs text-gray-700 sm:text-sm">
+                            Showing {certificates.from} to {certificates.to} of{' '}
+                            {certificates.total} results
                         </div>
-                    )}
+                        <div className="flex items-center justify-center gap-1 sm:gap-2">
+                            <button
+                                onClick={() =>
+                                    router.get(certificates.prev_page_url)
+                                }
+                                disabled={!certificates.prev_page_url}
+                                className="flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 sm:px-3 sm:text-sm"
+                            >
+                                <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+                                <span className="hidden sm:inline">
+                                    Previous
+                                </span>
+                                <span className="sm:hidden">Prev</span>
+                            </button>
+                            <span className="text-xs text-gray-600 sm:text-sm">
+                                {certificates.current_page}/
+                                {certificates.last_page}
+                            </span>
+                            <button
+                                onClick={() =>
+                                    router.get(certificates.next_page_url)
+                                }
+                                disabled={!certificates.next_page_url}
+                                className="flex items-center gap-1 rounded-md border border-gray-300 px-2 py-1 text-xs text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 sm:px-3 sm:text-sm"
+                            >
+                                <span className="hidden sm:inline">Next</span>
+                                <span className="sm:hidden">Next</span>
+                                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Right Panel: Request History Card */}
-                <div className="rounded-lg bg-white p-6 shadow-md">
+                <div className="rounded-lg bg-white p-4 shadow-md sm:p-6">
                     {/* Header */}
-                    <div className="mb-4 flex items-center justify-between">
+                    <div className="mb-3 flex flex-col gap-3 sm:mb-4 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-center gap-2">
-                            <h3 className="text-lg font-semibold text-gray-900">
+                            <h3 className="text-base font-semibold text-gray-900 sm:text-lg">
                                 Request History
                             </h3>
                             <ChevronRight className="h-4 w-4 text-gray-400" />
                         </div>
-                        <button className="flex items-center gap-2 rounded-md border border-gray-300 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50">
-                            <Download className="h-4 w-4" />
-                            Download All
+                        <button className="flex items-center gap-2 rounded-md border border-gray-300 px-2 py-1 text-xs text-gray-700 hover:bg-gray-50 sm:px-3 sm:py-1 sm:text-sm">
+                            <Download className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <span className="hidden sm:inline">
+                                Download All
+                            </span>
+                            <span className="sm:hidden">All</span>
                         </button>
                     </div>
 
-                    {/* Table Headers */}
-                    <div className="mb-3 grid grid-cols-4 gap-4 text-xs font-medium text-gray-500">
+                    {/* Table Headers - Hidden on mobile */}
+                    <div className="mb-3 hidden grid-cols-4 gap-2 text-xs font-medium text-gray-500 sm:mb-4 sm:grid sm:gap-4">
                         <div>Document Name</div>
                         <div>Status</div>
                         <div>Date uploaded</div>
@@ -300,33 +304,40 @@ export default function RequestStatus() {
                         completedCertificates.data.map((certificate: any) => (
                             <div
                                 key={certificate.id}
-                                className="flex items-center gap-3 border-b p-3"
+                                className="flex flex-col gap-3 border-b p-3 sm:flex-row sm:items-center sm:gap-3 sm:p-3"
                             >
-                                <div className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
-                                    <Check className="h-3 w-3" />
-                                    Completed
-                                </div>
-                                <div className="flex flex-1 items-center gap-2">
-                                    <div className="rounded bg-blue-100 p-1">
-                                        <FileText className="h-3 w-3 text-blue-600" />
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-medium text-gray-900">
-                                            {certificate.document_name ||
-                                                certificate.name}
-                                            .pdf
-                                        </div>
-                                        <div className="text-xs text-gray-500">
-                                            Certificate
-                                        </div>
+                                {/* Mobile-friendly layout */}
+                                <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
+                                        <Check className="h-3 w-3" />
+                                        Completed
                                     </div>
                                 </div>
-                                <DateTooltip date={certificate.created_at}>
-                                    <div className="cursor-help text-xs text-gray-500 transition-colors hover:text-gray-700">
-                                        {truncateDate(certificate.created_at)}
+                                <div className="flex flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="rounded bg-blue-100 p-1">
+                                            <FileText className="h-3 w-3 text-blue-600" />
+                                        </div>
+                                        <div>
+                                            <div className="text-sm font-medium text-gray-900">
+                                                {certificate.document_name ||
+                                                    certificate.name}
+                                                .pdf
+                                            </div>
+                                            <div className="text-xs text-gray-500">
+                                                Certificate
+                                            </div>
+                                        </div>
                                     </div>
-                                </DateTooltip>
-                                <button className="rounded p-1 hover:bg-gray-100">
+                                    <DateTooltip date={certificate.created_at}>
+                                        <div className="cursor-help text-xs text-gray-500 transition-colors hover:text-gray-700">
+                                            {truncateDate(
+                                                certificate.created_at,
+                                            )}
+                                        </div>
+                                    </DateTooltip>
+                                </div>
+                                <button className="self-end rounded p-1 hover:bg-gray-100 sm:self-auto">
                                     <Download className="h-4 w-4 text-gray-400" />
                                 </button>
                             </div>

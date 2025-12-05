@@ -11,6 +11,8 @@ class ResidentDashboardController extends Controller
     /**
      * Display the resident dashboard.
      */
+
+
     public function index()
     {
         $user = Auth::user();

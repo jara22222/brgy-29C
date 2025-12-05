@@ -20,7 +20,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
             <Head title="Log in" />
 
             {/* 2. CARD CONTAINER: White background, rounded corners, shadow */}
-            <div className="w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-xl sm:p-8">
+            <div className="w-full max-w-2xl rounded-2xl border border-gray-100 bg-white p-8 shadow-xl sm:p-10">
                 {/* 3. LOGO & HEADER SECTION */}
                 <div className="mb-6 flex flex-col items-center text-center">
                     <img
