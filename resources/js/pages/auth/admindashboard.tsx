@@ -147,27 +147,29 @@ export default function Dashboard(props: { residents: [] }) {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100 bg-white">
-                                <td className="px-6 py-4">001</td>
-                                <td className="flex items-center justify-center gap-2 px-6 py-4">
-                                    <Avatar>
-                                        <AvatarImage
-                                            src="./myassets/Logo.png"
-                                            className="border"
-                                        />
-                                        <AvatarFallback>Cn</AvatarFallback>
-                                    </Avatar>
-                                    <span>sad</span>
-                                </td>
-                                <td className="px-6 py-4">Role</td>
-                                <td className="px-6 py-4 text-center align-middle">
-                                    Email add
-                                </td>
-                                <td className="px-6 py-4 text-center align-middle">
-                                    Date
-                                </td>
-                                <td className="px-6 py-4 text-center align-middle">
-                                    Actions
-                                </td>
+                                <tr>
+                                    <td className="px-6 py-4">001</td>
+                                    <td className="flex items-center justify-center gap-2 px-6 py-4">
+                                        <Avatar>
+                                            <AvatarImage
+                                                src="./myassets/Logo.png"
+                                                className="border"
+                                            />
+                                            <AvatarFallback>Cn</AvatarFallback>
+                                        </Avatar>
+                                        <span>sad</span>
+                                    </td>
+                                    <td className="px-6 py-4">Role</td>
+                                    <td className="px-6 py-4 text-center align-middle">
+                                        Email add
+                                    </td>
+                                    <td className="px-6 py-4 text-center align-middle">
+                                        Date
+                                    </td>
+                                    <td className="px-6 py-4 text-center align-middle">
+                                        Actions
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

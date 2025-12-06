@@ -3,6 +3,7 @@
 use App\Http\Controllers\GuestCertificateController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResidentDashboardController;
+use App\Http\Controllers\StaffDashboardController;
 use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\adminController;
@@ -27,9 +28,8 @@ Route::post('guest-certificate-request', [GuestCertificateController::class, 'st
 
 // staff
 Route::middleware(['auth','verified','role:staff'])->group(function(){
-    Route::get('staffdashboard', function () {
-        return Inertia::render('auth/staffdashboard');
-    })->name('staffdashboard');
+    Route::get('staffdashboard', [StaffDashboardController::class, 'index'])->name('staffdashboard');
+    Route::post('staff/verify-certificate', [StaffDashboardController::class, 'verifyCertificate'])->name('staff.verify.certificate');
 });
 
 // admin
@@ -47,6 +47,7 @@ Route::middleware(['auth','verified','role:admin'])->group(function(){
 // resident
 Route::middleware(['auth', 'verified','role:resident'])->group(function () {
     Route::get('resident-dashboard', [ResidentDashboardController::class, 'index'])->name('residentdashboard');
+    Route::get('resident-dashboard/request-history', [ResidentDashboardController::class, 'requestHistory'])->name('resident.request-history');
     
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
@@ -85,6 +86,10 @@ Route::middleware(['auth', 'verified','role:resident'])->group(function () {
 
     // Requested Certificates routes
     Route::resource('requested-certificates', RequestedCertificateController::class);
+    
+    // Notification routes
+    Route::get('notifications', [RequestedCertificateController::class, 'getNotifications'])->name('notifications.index');
+    Route::post('notifications/{certificateId}/read', [RequestedCertificateController::class, 'markNotificationAsRead'])->name('notifications.read');
     
 });
 

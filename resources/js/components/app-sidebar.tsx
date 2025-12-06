@@ -19,20 +19,18 @@ import {
     adminaccountmanagement,
     admindocument,
     dashboard,
-    todolist,
+    staffdashboard,
 } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import {
-    Bell,
     BookOpen,
     ChevronDown,
     FileText,
     Folder,
+    FolderCog,
     History,
     Home,
-    LayoutGrid,
-    ListCheckIcon,
     Menu,
     Moon,
     Phone,
@@ -41,6 +39,7 @@ import {
     X,
 } from 'lucide-react';
 import { useState } from 'react';
+import NotificationDropdown from './notification-dropdown';
 
 const footerNavItems: NavItem[] = [
     {
@@ -71,8 +70,8 @@ export default function AppSidebar({ documents }: { documents?: any[] }) {
 
     const displayDocuments = documents || fallbackDocuments;
 
-    // For non-admin users, create a navbar instead of sidebar
-    if (auth.user.role !== 'admin') {
+    // For non-admin and non-staff users, create a navbar instead of sidebar
+    if (auth.user.role !== 'admin' && auth.user.role !== 'staff') {
         return (
             <nav className="fixed top-0 z-50 flex h-16 w-full items-center justify-between bg-white px-3 font-inter text-[#172F92] shadow-md sm:px-6 lg:px-12 xl:px-16 2xl:px-20">
                 <div className="flex items-center gap-4">
@@ -96,7 +95,7 @@ export default function AppSidebar({ documents }: { documents?: any[] }) {
                             <span className="hidden sm:inline">Home</span>
                         </Link>
                         <Link
-                            href="/resident-dashboard"
+                            href="/resident-dashboard/request-history"
                             className="flex cursor-pointer items-center gap-2 text-sm hover:underline lg:text-base"
                         >
                             <History size={16} />
@@ -156,10 +155,7 @@ export default function AppSidebar({ documents }: { documents?: any[] }) {
                     </div>
 
                     <div className="flex items-center gap-2 lg:gap-4">
-                        {/* Notification Bell */}
-                        <button className="relative cursor-pointer rounded p-2 hover:bg-gray-100">
-                            <Bell size={18} />
-                        </button>
+                        <NotificationDropdown />
 
                         {/* Dark/Light Mode Toggle */}
                         <button
@@ -211,7 +207,7 @@ export default function AppSidebar({ documents }: { documents?: any[] }) {
                                 Home
                             </Link>
                             <Link
-                                href="/resident-dashboard"
+                                href="/resident-dashboard/request-history"
                                 className="flex cursor-pointer items-center gap-2 text-sm hover:underline"
                                 onClick={() => setShowMobileMenu(false)}
                             >
@@ -272,10 +268,7 @@ export default function AppSidebar({ documents }: { documents?: any[] }) {
 
                             <div className="flex items-center justify-between border-t pt-4">
                                 <div className="flex items-center gap-2">
-                                    {/* Notification Bell */}
-                                    <button className="relative cursor-pointer rounded p-2 hover:bg-gray-100">
-                                        <Bell size={18} />
-                                    </button>
+                                    <NotificationDropdown />
 
                                     {/* Dark/Light Mode Toggle */}
                                     <button
@@ -333,22 +326,12 @@ export default function AppSidebar({ documents }: { documents?: any[] }) {
                   },
               ]
             : []),
-        ...(auth.user.role !== 'admin'
+        ...(auth.user.role === 'staff'
             ? [
                   {
-                      title: 'Dashboard',
-                      href: dashboard(),
-                      icon: LayoutGrid,
-                  },
-              ]
-            : []),
-
-        ...(auth.user.role !== 'admin'
-            ? [
-                  {
-                      title: 'Todo List',
-                      href: todolist(),
-                      icon: ListCheckIcon,
+                      title: 'Request Management',
+                      href: staffdashboard(),
+                      icon: FolderCog,
                   },
               ]
             : []),

@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
+
 import { request } from '@/routes/password';
 import { Form, Head, Link } from '@inertiajs/react';
 
@@ -35,7 +36,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
                 {/* 4. FORM SECTION */}
                 <Form
-                    {...store.form()}
+                    {...store()}
                     resetOnSuccess={['password']}
                     className="flex flex-col gap-5"
                 >

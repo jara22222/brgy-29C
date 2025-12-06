@@ -6,6 +6,7 @@ interface Document {
     documentName: string;
     documentPurpose: string;
     documentType: string;
+    status?: string;
 }
 
 export default function ResidentDocument() {
@@ -37,18 +38,22 @@ export default function ResidentDocument() {
         }
     };
 
-    // Filter documents by type
+    // Filter documents by type and exclude inactive ones
     const clearanceDocuments =
         documents?.filter(
-            (doc: Document) => doc.documentType === 'clearance',
+            (doc: Document) =>
+                doc.documentType === 'clearance' && doc.status !== 'inactive',
         ) || [];
     const certificateDocuments =
         documents?.filter(
-            (doc: Document) => doc.documentType === 'certificate',
+            (doc: Document) =>
+                doc.documentType === 'certificate' && doc.status !== 'inactive',
         ) || [];
     const specialDocuments =
-        documents?.filter((doc: Document) => doc.documentType === 'special') ||
-        [];
+        documents?.filter(
+            (doc: Document) =>
+                doc.documentType === 'special' && doc.status !== 'inactive',
+        ) || [];
 
     return (
         <section className="flex w-full flex-col items-center bg-slate-50 px-3 py-8 font-rubik sm:px-6 sm:py-12 md:px-12 md:py-16 lg:px-20 lg:py-20 xl:px-32 xl:py-24 2xl:px-40">

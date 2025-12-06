@@ -47,32 +47,38 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'firstName' => 'required|string|max:255',
-            'middleName' => 'nullable|string|max:255',
-            'lastName' => 'required|string|max:255',
-            'gender' => 'nullable|in:Male,Female',
-            'civilStatus' => 'required|in:Single,Married,Divorced,Widowed',
-            'dateOfBirth' => 'nullable|date',
-            'street' => 'nullable|string|max:255',
-            'purok' => 'nullable|string|max:255',
-            'barangay' => 'nullable|string|max:255',
-            'city' => 'nullable|string|max:255',
-            'province' => 'nullable|string|max:255',
-            'postal' => 'nullable|string|max:20',
-            'email' => 'required|email|unique:users,email',
-            'mobileNo' => 'nullable|string|max:20',
-            'userName' => 'required|string|unique:users,userName|max:255',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        try {
+            $validated = $request->validate([
+                'firstName' => 'required|string|max:255',
+                'middleName' => 'nullable|string|max:255',
+                'lastName' => 'required|string|max:255',
+                'gender' => 'nullable|in:Male,Female',
+                'civilStatus' => 'required|in:Single,Married,Divorced,Widowed',
+                'dateOfBirth' => 'nullable|date',
+                'street' => 'nullable|string|max:255',
+                'purok' => 'nullable|string|max:255',
+                'barangay' => 'nullable|string|max:255',
+                'city' => 'nullable|string|max:255',
+                'province' => 'nullable|string|max:255',
+                'postal' => 'nullable|string|max:20',
+                'email' => 'required|email|unique:users,email',
+                'mobileNo' => 'nullable|string|max:20',
+                'userName' => 'required|string|unique:users,userName|max:255',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
 
-        $validated['password'] = bcrypt($validated['password']);
-        $validated['role'] = 'staff';
-        $validated['name'] = $validated['firstName'] . ' ' . $validated['lastName'];
+            $validated['password'] = bcrypt($validated['password']);
+            $validated['role'] = 'staff';
+            $validated['name'] = $validated['firstName'] . ' ' . $validated['lastName'];
 
-        $user = User::create($validated);
+            $user = User::create($validated);
 
-        return redirect()->route('admindashboard')->with('success', 'Staff account created successfully');
+            return redirect()->route('adminaccountmanagement')->with('success', 'Staff account created successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Error creating staff account: ' . $e->getMessage());
+        }
     }
 
     /**

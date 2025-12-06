@@ -1,5 +1,6 @@
 // Document Dashboard Component - Force refresh
 import DocumentModal from '@/components/registerComponents/documentModal';
+import GenerateDocumentModal from '@/components/registerComponents/generateDocumentModal';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import AppLayout from '@/layouts/app-layout';
@@ -30,6 +31,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function DocumentDashboard(props: { documents: any[] }) {
     const { documents } = props;
     const [showDocumentModal, setShowDocumentModal] = useState(false);
+    const [showGenerateDocumentModal, setShowGenerateDocumentModal] =
+        useState(false);
     const [documentStatuses, setDocumentStatuses] = useState<{
         [key: string]: boolean;
     }>(() => {
@@ -103,6 +106,10 @@ export default function DocumentDashboard(props: { documents: any[] }) {
                 isOpen={showDocumentModal}
                 onClose={() => setShowDocumentModal(false)}
             />
+            <GenerateDocumentModal
+                isOpen={showGenerateDocumentModal}
+                onClose={() => setShowGenerateDocumentModal(false)}
+            />
             <div className="min-h-screen bg-gray-50 p-6 font-inter">
                 {/* Top Header Section */}
                 <div className="mb-6 flex items-center justify-between">
@@ -158,7 +165,12 @@ export default function DocumentDashboard(props: { documents: any[] }) {
                             </div>
 
                             {/* Download Button */}
-                            <Button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-blue-700 bg-blue-800 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700">
+                            <Button
+                                onClick={() =>
+                                    setShowGenerateDocumentModal(true)
+                                }
+                                className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-blue-700 bg-blue-800 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+                            >
                                 Download All <Download size={16} />
                             </Button>
                         </div>

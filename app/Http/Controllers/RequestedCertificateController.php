@@ -78,7 +78,7 @@ class RequestedCertificateController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        return Inertia::render('RequestedCertificates/Show', [
+        return Inertia::render('residents/RequestHistory', [
             'certificate' => $requestedCertificate->load('user')
         ]);
     }
@@ -98,6 +98,7 @@ class RequestedCertificateController extends Controller
             'remarks' => 'nullable|string|max:500',
         ]);
 
+        $oldStatus = $requestedCertificate->status;
         $requestedCertificate->update([
             'status' => $validated['status'],
             'remarks' => $validated['remarks'],
@@ -105,8 +106,40 @@ class RequestedCertificateController extends Controller
             'completed_at' => $validated['status'] === 'completed' ? now() : $requestedCertificate->completed_at,
         ]);
 
+        // If status changed to completed, mark as unread for notification
+        if ($oldStatus !== 'completed' && $validated['status'] === 'completed') {
+            $requestedCertificate->update(['read_status' => 'unread']);
+        }
+
         return redirect()->back()
             ->with('success', 'Certificate status updated successfully!');
+    }
+
+    /**
+     * Get user notifications for the sidebar.
+     */
+    public function getNotifications()
+    {
+        $user = Auth::user();
+        $notifications = RequestedCertificate::getUserNotifications($user->id);
+        
+        return response()->json(['notifications' => $notifications]);
+    }
+
+    /**
+     * Mark notification as read.
+     */
+    public function markNotificationAsRead($certificateId)
+    {
+        $user = Auth::user();
+        $certificate = RequestedCertificate::where('id', $certificateId)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+            
+        $certificate->markAsRead();
+        
+        return redirect()->back()
+            ->with('success', 'Notification marked as read');
     }
 
     /**

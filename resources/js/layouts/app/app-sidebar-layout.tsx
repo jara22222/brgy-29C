@@ -12,8 +12,11 @@ export default function AppSidebarLayout({
 }: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[] }>) {
     const { auth } = usePage<any>().props;
 
-    // For non-admin users, use navbar layout
-    if (auth.user.role !== 'admin') {
+    // Always use sidebar layout for admin and staff users
+    const useSidebarLayout =
+        auth.user.role === 'admin' || auth.user.role === 'staff';
+
+    if (!useSidebarLayout) {
         return (
             <div className="min-h-screen">
                 <AppSidebar />
@@ -22,7 +25,7 @@ export default function AppSidebarLayout({
         );
     }
 
-    // For admin users, use the full sidebar layout
+    // For admin and staff users, use the full sidebar layout
     return (
         <AppShell variant="sidebar">
             <AppSidebar />
