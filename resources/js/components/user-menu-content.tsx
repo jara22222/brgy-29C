@@ -47,7 +47,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
                 </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem asChild variant={'destructive'}>
                 <Link
                     className="block w-full cursor-pointer"
                     href={logout()}

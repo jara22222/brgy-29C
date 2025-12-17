@@ -1,35 +1,46 @@
-export default function CertificateInfo() {
+import { usePage } from '@inertiajs/react';
+
+interface CertificateInfoProps {
+    documentName?: string;
+}
+
+export default function CertificateInfo({
+    documentName,
+}: CertificateInfoProps) {
+    const { url_params } = usePage().props as any;
+    const selectedDocumentName =
+        documentName || url_params?.document_name || 'Barangay Certificate';
     return (
         <div className="w-full py-6 font-sans md:py-8 lg:py-12">
             {/* Header Section */}
             <section className="mb-12 text-center">
                 <div className="space-y-2">
                     <h1 className="text-3xl font-bold text-gray-800 md:text-4xl lg:text-5xl">
-                        What is a Barangay Certificate?
+                        What is a {selectedDocumentName}?
                     </h1>
                     <p className="text-lg text-gray-600 md:text-xl">
-                        Ano ang Barangay Certificate?
+                        Ano ang {selectedDocumentName}?
                     </p>
                 </div>
 
                 <div className="mx-auto mt-8 rounded-xl bg-blue-50 p-8 text-left shadow-lg md:p-10">
                     <p className="mb-4 text-base leading-relaxed text-gray-800 md:text-lg">
-                        A Barangay Certificate is an official document issued by
-                        the barangay that serves as formal proof that a person
-                        is a legitimate resident of the barangay. It also
+                        A {selectedDocumentName} is an official document issued
+                        by the barangay that serves as formal proof that a
+                        person is a legitimate resident of the barangay. It also
                         certifies that the individual is of good moral
                         character, maintains harmonious relationships within the
                         community, and has no pending complaints or cases filed
                         in the barangay.
                     </p>
                     <p className="text-sm leading-relaxed text-gray-600 italic md:text-base">
-                        Ang Barangay Certificate ay isang opisyal na dokumentong
-                        ibinibigay ng barangay na nagsisilbing pormal na patunay
-                        na ang isang tao ay lehitimong residente ng barangay.
-                        Pinatutunayan din nito na ang indibidwal ay may mabuting
-                        asal, may maayos na pakikitungo sa kapwa sa loob ng
-                        komunidad, at walang nakabinbing reklamo o kasong
-                        isinampa sa barangay.
+                        Ang {selectedDocumentName} ay isang opisyal na
+                        dokumentong ibinibigay ng barangay na nagsisilbing
+                        pormal na patunay na ang isang tao ay lehitimong
+                        residente ng barangay. Pinatutunayan din nito na ang
+                        indibidwal ay may mabuting asal, may maayos na
+                        pakikitungo sa kapwa sa loob ng komunidad, at walang
+                        nakabinbing reklamo o kasong isinampa sa barangay.
                     </p>
                 </div>
             </section>
@@ -40,10 +51,10 @@ export default function CertificateInfo() {
                 <section className="flex flex-col">
                     <div className="mb-6 text-center">
                         <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
-                            PurposePurpose of Barangay Certificate
+                            Purpose of {selectedDocumentName}
                         </h2>
                         <p className="text-base text-gray-600 md:text-lg">
-                            Layunin ng Barangay Cerificate
+                            Layunin ng {selectedDocumentName}
                         </p>
                     </div>
 

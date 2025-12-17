@@ -1,11 +1,9 @@
 import AddNewStaffComponent from '@/components/registerComponents/addNewStaff';
-import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { adminaccountmanagement } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
-import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import {
     Calendar,
     ChevronLeft,
@@ -14,6 +12,7 @@ import {
     HelpCircle,
     Plus,
     Search,
+    User,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -25,7 +24,23 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Dashboard(props: { residents: [] }) {
+interface PageProps {
+    flash?: {
+        success?: string;
+        error?: string;
+        titleError?: string;
+        descriptionError?: string;
+    };
+    residents: Array<{
+        id: number;
+        name: string;
+        email: string;
+        role: string;
+        created_at: string;
+    }>;
+}
+
+export default function Dashboard(props: PageProps) {
     const { residents } = props;
     const [showAddModal, setShowAddModal] = useState(false);
 
@@ -147,29 +162,62 @@ export default function Dashboard(props: { residents: [] }) {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100 bg-white">
-                                <tr>
-                                    <td className="px-6 py-4">001</td>
-                                    <td className="flex items-center justify-center gap-2 px-6 py-4">
-                                        <Avatar>
-                                            <AvatarImage
-                                                src="./myassets/Logo.png"
-                                                className="border"
-                                            />
-                                            <AvatarFallback>Cn</AvatarFallback>
-                                        </Avatar>
-                                        <span>sad</span>
-                                    </td>
-                                    <td className="px-6 py-4">Role</td>
-                                    <td className="px-6 py-4 text-center align-middle">
-                                        Email add
-                                    </td>
-                                    <td className="px-6 py-4 text-center align-middle">
-                                        Date
-                                    </td>
-                                    <td className="px-6 py-4 text-center align-middle">
-                                        Actions
-                                    </td>
-                                </tr>
+                                {residents?.map((resident, index) => (
+                                    <tr key={resident.id || index}>
+                                        <td className="px-6 py-4">
+                                            <div className="text-sm font-medium text-gray-900">
+                                                #
+                                                {String(index + 1).padStart(
+                                                    3,
+                                                    '0',
+                                                )}
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200">
+                                                    <User
+                                                        size={20}
+                                                        className="text-gray-600"
+                                                    />
+                                                </div>
+                                                <div className="font-medium text-gray-900">
+                                                    {resident.name || 'N/A'}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-700">
+                                                Staff
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 text-center align-middle">
+                                            <div className="text-sm text-gray-600">
+                                                {resident.email || 'N/A'}
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-center align-middle">
+                                            <div className="text-sm text-gray-600">
+                                                {resident.created_at
+                                                    ? new Date(
+                                                          resident.created_at,
+                                                      ).toLocaleDateString()
+                                                    : 'N/A'}
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-center align-middle">
+                                            <div className="flex items-center justify-center gap-2">
+                                                <Button
+                                                    size="sm"
+                                                    variant="outline"
+                                                    className="h-8 w-8 p-0"
+                                                >
+                                                    <ChevronRight size={14} />
+                                                </Button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

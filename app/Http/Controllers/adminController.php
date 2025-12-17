@@ -18,20 +18,14 @@ class adminController extends Controller
      */
     public function index()
     {
-       $residents = [
-        [
-            'id' => '1223',
-            'name' => 'Azuela',
-            'role' => 'mama',
-            'email' => 'pending',
-            'createdAt' => 'm@example.com',
-        ]
-    ];
+        $residents = User::where('role', 'staff')
+            ->select('id', 'name', 'email', 'role', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-    // 2. Pass data to the React page component
-    return Inertia::render('auth/admindashboard', [
-        'residents' => $residents
-    ]);
+        return Inertia::render('auth/admindashboard', [
+            'residents' => $residents
+        ]);
     }
 
     /**

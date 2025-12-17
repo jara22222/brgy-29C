@@ -9,6 +9,8 @@ use Inertia\Inertia;
 
 class ResidentDashboardController extends Controller
 {
+
+   
     public function requestHistory()
     {
         $user = Auth::user();

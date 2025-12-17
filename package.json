@@ -11,7 +11,7 @@
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
         "types": "tsc --noEmit",
-        "dev:all": "echo 'DO NOT USE IN PRODUCTION'"
+        "dev:all": "concurrently \"php artisan serve\" \"vite\" --names \"Laravel,Vite\" --prefix-colors \"blue,green\""
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",

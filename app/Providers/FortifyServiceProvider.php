@@ -28,6 +28,7 @@ class FortifyServiceProvider extends ServiceProvider
     {
         $this->configureViews();
         $this->configureRateLimiting();
+        $this->configureRedirects();
     }
 
     /**
@@ -62,6 +63,20 @@ class FortifyServiceProvider extends ServiceProvider
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
             return Limit::perMinute(5)->by($throttleKey);
+        });
+    }
+
+    private function configureRedirects(): void
+    {
+        Fortify::redirects('login', function (Request $request) {
+            $user = $request->user();
+            
+            return match ($user->role) {
+                'admin' => route('adminaccountmanagement'),
+                'staff' => route('staffdashboard'),
+                'resident' => route('residentdashboard'),
+                default => route('residentdashboard'),
+            };
         });
     }
 }

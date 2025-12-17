@@ -192,7 +192,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                         <Input
                                                             type="text"
                                                             required
-                                                            placeholder="Enter Your First Name"
+                                                            placeholder="Enter First Name"
                                                             value={firstName}
                                                             onChange={(e) =>
                                                                 setFirstName(
@@ -211,7 +211,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                         </label>
                                                         <Input
                                                             type="text"
-                                                            placeholder="Enter Your Middle Name"
+                                                            placeholder="Enter Middle Name"
                                                             value={middleName}
                                                             onChange={(e) =>
                                                                 setMiddleName(
@@ -230,7 +230,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                         <Input
                                                             type="text"
                                                             required
-                                                            placeholder="Enter Your Last Name"
+                                                            placeholder="Enter Last Name"
                                                             value={lastName}
                                                             onChange={(e) =>
                                                                 setLastName(
@@ -244,7 +244,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
 
                                                     <div className="space-y-1.5">
                                                         <label className="text-sm font-semibold text-gray-700">
-                                                            What's your gender?
+                                                            What's gender?
                                                             (optional)
                                                         </label>
                                                         <select
@@ -270,7 +270,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                     </div>
                                                     <div className="space-y-1.5">
                                                         <label className="text-sm font-semibold text-gray-700">
-                                                            *What's your Civil
+                                                            *What's Civil
                                                             Status?
                                                         </label>
                                                         <select
@@ -419,7 +419,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                     </label>
                                                     <Input
                                                         type="text"
-                                                        placeholder="Enter Your Street"
+                                                        placeholder="Enter Street"
                                                         value={street}
                                                         onChange={(e) =>
                                                             setStreet(
@@ -436,7 +436,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                     </label>
                                                     <Input
                                                         type="text"
-                                                        placeholder="Enter Your Purok"
+                                                        placeholder="Enter Purok"
                                                         value={purok}
                                                         onChange={(e) =>
                                                             setPurok(
@@ -453,7 +453,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                     </label>
                                                     <Input
                                                         type="text"
-                                                        placeholder="Enter Your Barangay"
+                                                        placeholder="Enter Barangay"
                                                         value={barangay}
                                                         onChange={(e) =>
                                                             setBarangay(
@@ -471,7 +471,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                         </label>
                                                         <Input
                                                             type="text"
-                                                            placeholder="Enter Your City"
+                                                            placeholder="Enter City"
                                                             value={city}
                                                             onChange={(e) =>
                                                                 setCity(
@@ -488,7 +488,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                         </label>
                                                         <Input
                                                             type="text"
-                                                            placeholder="Enter Your Province"
+                                                            placeholder="Enter Province"
                                                             value={province}
                                                             onChange={(e) =>
                                                                 setProvince(
@@ -507,7 +507,7 @@ export default function AddNewStaffComponent({ isOpen, onClose }: ModalProps) {
                                                     </label>
                                                     <Input
                                                         type="text"
-                                                        placeholder="Enter Your Postal Code"
+                                                        placeholder="Enter Postal Code"
                                                         value={postal}
                                                         onChange={(e) =>
                                                             setPostal(

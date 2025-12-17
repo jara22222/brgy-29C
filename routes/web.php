@@ -34,9 +34,7 @@ Route::middleware(['auth','verified','role:staff'])->group(function(){
 
 // admin
 Route::middleware(['auth','verified','role:admin'])->group(function(){
-    Route::get('admin/accountmanagement', function () {
-        return Inertia::render('auth/admindashboard');
-    })->name('adminaccountmanagement');
+    Route::get('admin/accountmanagement', [adminController::class, 'index'])->name('adminaccountmanagement');
     
      Route::get('admin/document',[documentLibraryController::class,'index'])->name('admindocument');
      Route::resource('documents', documentLibraryController::class);
@@ -50,7 +48,9 @@ Route::middleware(['auth', 'verified','role:resident'])->group(function () {
     Route::get('resident-dashboard/request-history', [ResidentDashboardController::class, 'requestHistory'])->name('resident.request-history');
     
     Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
+        return Inertia::render('dashboard', [
+            'url_params' => request()->query()
+        ]);
     })->name('dashboard');
 
     //greetings route's contoller call

@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->string('documentType')->default('PDF')->after('documentName');
+            if (!Schema::hasColumn('documents', 'documentType')) {
+                $table->string('documentType')->default('PDF')->after('documentName');
+            }
         });
     }
 

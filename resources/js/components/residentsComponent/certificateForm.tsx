@@ -287,7 +287,7 @@ export default function CertificateForm() {
                                     id="address"
                                     name="address"
                                     value={formData.address}
-                                    readOnly
+                                    onChange={handleInputChange}
                                     disabled={isSubmitting}
                                     className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-0 focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-100"
                                     placeholder="Address will be auto-populated from your profile"
